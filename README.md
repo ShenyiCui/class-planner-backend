@@ -1,99 +1,127 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Class Planner
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A NestJS application that allows students to plan their 4-year academic journey at a university. This application manages users, courses, degrees, and their relationships, enabling students to create personalized class schedules based on degree requirements and course prerequisites.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Table of Contents
 
-## Description
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+  - [1. Clone the Repository](#1-clone-the-repository)
+  - [2. Install Dependencies](#3-install-dependencies)
+  - [3. Configure Environment Variables](#4-configure-environment-variables)
+  - [4. Set Up the Database](#5-set-up-the-database)
+  - [5. Run the Application](#6-run-the-application)
+- [Available Scripts](#available-scripts)
+- [Project Structure](#project-structure)
+- [API Endpoints](#api-endpoints)
+- [Contributing](#contributing)
+- [License](#license)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Features
 
-## Project setup
+- **User Management**: Create, read, update, and delete users.
+- **Course Management**: Manage courses with credits and prerequisites.
+- **Degree Management**: Define degrees with required courses.
+- **Relationship Handling**: Manage relationships between users, courses, and degrees.
+- **Exception Handling**: Robust error handling using Prisma exception filters.
 
-```bash
-$ pnpm install
-```
+## Prerequisites
 
-## Compile and run the project
+Before you begin, ensure you have met the following requirements:
 
-```bash
-# development
-$ pnpm run start
+- **Node.js**: Version 14 or higher. [Download Node.js](https://nodejs.org/)
+- **pnpm**: Fast, disk space-efficient package manager. [Install pnpm](https://pnpm.io/installation)
+- **PostgreSQL**: Install and set up PostgreSQL. [Download PostgreSQL](https://www.postgresql.org/download/)
+- **Git**: For version control and cloning the repository. [Download Git](https://git-scm.com/downloads)
 
-# watch mode
-$ pnpm run start:dev
+## Installation
 
-# production mode
-$ pnpm run start:prod
-```
+Follow these steps to set up and run the project locally.
 
-## Run tests
+### 1. Clone the Repository
+
+Clone this repository to your local machine using Git.
 
 ```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+git clone git@github.com:ShenyiCui/class-planner-backend.git
+cd class-planner-backend
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 2. Install Dependencies
 
 ```bash
-$ pnpm install -g mau
-$ mau deploy
+pnpm install
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 3. Configure Environment Variables
 
-## Resources
+```bash
+cp .env.example .env
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+Open the .env file in your text editor and add the following line:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```bash
+DATABASE_URL=postgresql://user:password@localhost:5432/class_planner_db?schema=public
+```
 
-## Support
+Replace the placeholders:
+• user: Your PostgreSQL username.
+• password: Your PostgreSQL password.
+• localhost: Your PostgreSQL host (usually localhost).
+• 5432: Your PostgreSQL port (default is 5432).
+• class_planner_db: The name of your PostgreSQL database.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Ensure that the specified database (class_planner_db) exists. You can create it using PostgreSQL tools like psql or pgAdmin.
 
-## Stay in touch
+### 4. Set Up the Database
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Use Prisma to generate the client and run migrations to set up your database schema.
 
-## License
+```bash
+pnpm prisma generate
+pnpm prisma migrate dev --name init
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### 5. Run the Application
+
+Start the NestJS application in development mode.
+
+```bash
+pnpm run start:dev
+```
+
+Navigate to `http://localhost:3000` in your browser to access the application.
+
+## Managing Prisma Migrations
+
+This project uses Prisma for database migrations and schema management. The following scripts have been added to the `package.json` to help you manage incremental migrations:
+
+### Prisma Scripts
+
+- **`prisma:generate`**: Generates the Prisma Client based on your Prisma schema. Run this whenever you make changes to your `schema.prisma` file.
+
+```bash
+pnpm prisma:generate
+```
+
+- **`prisma:migrate:dev`**: Creates a new migration and applies it to your development database. Use this when you’re developing and want to keep track of schema changes incrementally.
+
+```bash
+pnpm prisma:migrate:dev --name <migration-name>
+```
+
+Replace `<migration-name>` with a descriptive name for your migration, such as `add-user-table`.
+
+- **`prisma:migrate:deploy`**: Applies all pending migrations to the production database. Use this command when deploying your application to ensure the database schema is up to date.
+
+```bash
+pnpm prisma:migrate:deploy
+```
+
+- **`prisma:migrate:status`**: Checks the status of your migrations, showing which migrations have been applied and which are pending.
+
+```bash
+pnpm prisma:migrate:status
+```
