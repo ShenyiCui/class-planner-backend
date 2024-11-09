@@ -1,10 +1,6 @@
 // src/user/user.service.ts
 
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -24,6 +20,9 @@ export class UserService {
     });
   }
 
+  /**
+   * Find all users with course prerequisite analysis.
+   */
   async findAll(): Promise<UserWithCourseAnalysis[]> {
     const users = await this.prisma.user.findMany({
       include: { Has: { include: { Course: true } } },
@@ -69,6 +68,10 @@ export class UserService {
     return result;
   }
 
+  /**
+   * Find one user by ID with course prerequisite analysis.
+   * @param id - User ID
+   */
   async findOne(id: number): Promise<UserWithCourseAnalysis> {
     const user = await this.prisma.user.findUnique({
       where: { id },
@@ -124,6 +127,11 @@ export class UserService {
     });
   }
 
+  /**
+   * Add a course to a user without checking prerequisites.
+   * @param userId - User ID
+   * @param courseCode - Course Code to add
+   */
   async addCourseToUser(userId: number, courseCode: string) {
     // Check if user exists
     const user = await this.prisma.user.findUnique({
@@ -152,27 +160,7 @@ export class UserService {
     });
 
     if (existingHas) {
-      throw new BadRequestException(`User already has course ${courseCode}`);
-    }
-
-    // Get prerequisites for the course
-    const prereqs = await this.prisma.preReq.findMany({
-      where: { courseCode },
-    });
-
-    const prereqCodes = prereqs.map((pr) => pr.preReqCode);
-
-    // Check if user has all prerequisites
-    const userCourseCodes = user.Has.map((has) => has.Course.code);
-    const missingPrereqs = prereqCodes.filter(
-      (prCode) => !userCourseCodes.includes(prCode),
-    );
-
-    if (missingPrereqs.length > 0) {
-      throw new BadRequestException({
-        message: `Missing prerequisites for course ${courseCode}`,
-        missingPrerequisites: missingPrereqs,
-      });
+      throw new NotFoundException(`User already has course ${courseCode}`);
     }
 
     // Add the course to the user

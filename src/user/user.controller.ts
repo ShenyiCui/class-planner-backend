@@ -14,6 +14,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AddCourseDto } from './dto/add-course.dto';
+import { UserWithCourseAnalysis } from './user.interface';
 
 @Controller('users')
 export class UserController {
@@ -25,7 +26,7 @@ export class UserController {
   }
 
   /**
-   * Add a course to a specific user.
+   * Add a course to a specific user without checking prerequisites.
    * @param id - User ID
    * @param addCourseDto - Course code to add
    */
@@ -37,13 +38,22 @@ export class UserController {
     return this.userService.addCourseToUser(id, addCourseDto.courseCode);
   }
 
+  /**
+   * Get all users with course prerequisite analysis.
+   */
   @Get()
-  findAll() {
+  findAll(): Promise<UserWithCourseAnalysis[]> {
     return this.userService.findAll();
   }
 
+  /**
+   * Get a single user by ID with course prerequisite analysis.
+   * @param id - User ID
+   */
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<UserWithCourseAnalysis> {
     return this.userService.findOne(id);
   }
 
