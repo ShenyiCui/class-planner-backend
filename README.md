@@ -67,11 +67,12 @@ DATABASE_URL=postgresql://user:password@localhost:5432/class_planner_db?schema=p
 ```
 
 Replace the placeholders:
-• user: Your PostgreSQL username.
-• password: Your PostgreSQL password.
-• localhost: Your PostgreSQL host (usually localhost).
-• 5432: Your PostgreSQL port (default is 5432).
-• class_planner_db: The name of your PostgreSQL database.
+
+- user: Your PostgreSQL username.
+- password: Your PostgreSQL password.
+- localhost: Your PostgreSQL host (usually localhost).
+- 5432: Your PostgreSQL port (default is 5432).
+- class_planner_db: The name of your PostgreSQL database.
 
 Ensure that the specified database (class_planner_db) exists. You can create it using PostgreSQL tools like psql or pgAdmin.
 
@@ -84,6 +85,14 @@ pnpm prisma generate
 pnpm prisma migrate dev --name init
 ```
 
+#### OPTIONAL: Seed the Database
+
+add seed data to the database
+
+```bash
+pnpm run seed
+```
+
 ### 5. Run the Application
 
 Start the NestJS application in development mode.
@@ -92,7 +101,9 @@ Start the NestJS application in development mode.
 pnpm run start:dev
 ```
 
-Navigate to `http://localhost:3000` in your browser to access the application.
+Import the Postman collection to test the API endpoints.
+
+Run the APIs!
 
 ## Managing Prisma Migrations
 
