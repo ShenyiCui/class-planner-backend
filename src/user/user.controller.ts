@@ -1,4 +1,5 @@
 // src/user/user.controller.ts
+
 import {
   Controller,
   Get,
@@ -12,6 +13,7 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { AddCourseDto } from './dto/add-course.dto';
 
 @Controller('users')
 export class UserController {
@@ -20,6 +22,19 @@ export class UserController {
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
+  }
+
+  /**
+   * Add a course to a specific user.
+   * @param id - User ID
+   * @param addCourseDto - Course code to add
+   */
+  @Post(':id/add-course')
+  addCourseToUser(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() addCourseDto: AddCourseDto,
+  ) {
+    return this.userService.addCourseToUser(id, addCourseDto.courseCode);
   }
 
   @Get()

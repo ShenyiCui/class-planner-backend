@@ -101,6 +101,30 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Add Course to User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"courseCode\": \"CS102\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/users/{{userId}}/add-course",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["users", "{{userId}}", "add-course"]
+            }
+          },
+          "response": []
         }
       ]
     },
